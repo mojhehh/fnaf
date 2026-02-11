@@ -13,10 +13,11 @@ class CameraSystem {
         // Create canvas-based static noise for camera transitions (more reliable than video)
         this.staticCanvas = document.createElement('canvas');
         this.staticCanvas.id = 'camera-static-canvas';
-        this.staticCanvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;display:none;opacity:0.8;';
+        this.staticCanvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;opacity:0;transition:opacity 0.15s ease-in-out;';
         if (this.cameraPanel) this.cameraPanel.appendChild(this.staticCanvas);
         this.staticCtx = this.staticCanvas.getContext('2d');
         this.staticAnimId = null;
+        this.staticFadeTimeout = null;
         
         // 播放声音按钮状态
         this.soundButtonCooldown = false;
@@ -165,14 +166,22 @@ class CameraSystem {
         }
     }
     
-    // Stop static effect
+    // Stop static effect with fade out
     stopStatic() {
-        // Stop canvas static
-        this.staticCanvas.style.display = 'none';
-        if (this.staticAnimId) {
-            cancelAnimationFrame(this.staticAnimId);
-            this.staticAnimId = null;
+        // Clear any pending fade timeout
+        if (this.staticFadeTimeout) {
+            clearTimeout(this.staticFadeTimeout);
+            this.staticFadeTimeout = null;
         }
+        // Fade out
+        this.staticCanvas.style.opacity = '0';
+        // Stop animation after fade completes
+        this.staticFadeTimeout = setTimeout(() => {
+            if (this.staticAnimId) {
+                cancelAnimationFrame(this.staticAnimId);
+                this.staticAnimId = null;
+            }
+        }, 150);
         // Also stop video if it was playing
         if (this.staticVideo) {
             this.staticVideo.classList.remove('active');
@@ -181,15 +190,24 @@ class CameraSystem {
         }
     }
     
-    // Start static effect (for switching cameras) - canvas-based for reliability
+    // Start static effect (for switching cameras) - canvas-based with fade in
     startStatic() {
+        // Clear any pending fade timeout
+        if (this.staticFadeTimeout) {
+            clearTimeout(this.staticFadeTimeout);
+            this.staticFadeTimeout = null;
+        }
         // Size canvas to panel
         if (this.cameraPanel) {
             this.staticCanvas.width = this.cameraPanel.clientWidth || 1280;
             this.staticCanvas.height = this.cameraPanel.clientHeight || 720;
         }
-        this.staticCanvas.style.display = 'block';
+        // Start animation first, then fade in
         this._animateStatic();
+        // Use requestAnimationFrame to ensure the 0 opacity is rendered before transitioning
+        requestAnimationFrame(() => {
+            this.staticCanvas.style.opacity = '0.9'; // 90% opaque, 10% transparent
+        });
     }
     
     // Render static noise frames on canvas
