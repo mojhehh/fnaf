@@ -10,6 +10,14 @@ class CameraSystem {
         this.currentSoundToggle = false;
         this.staticVideo = document.getElementById('camera-static-video');
         
+        // Create canvas-based static noise for camera transitions (more reliable than video)
+        this.staticCanvas = document.createElement('canvas');
+        this.staticCanvas.id = 'camera-static-canvas';
+        this.staticCanvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;display:none;opacity:0.8;';
+        if (this.cameraPanel) this.cameraPanel.appendChild(this.staticCanvas);
+        this.staticCtx = this.staticCanvas.getContext('2d');
+        this.staticAnimId = null;
+        
         // 播放声音按钮状态
         this.soundButtonCooldown = false;
         this.soundButtonUseCount = 0;
@@ -159,6 +167,13 @@ class CameraSystem {
     
     // Stop static effect
     stopStatic() {
+        // Stop canvas static
+        this.staticCanvas.style.display = 'none';
+        if (this.staticAnimId) {
+            cancelAnimationFrame(this.staticAnimId);
+            this.staticAnimId = null;
+        }
+        // Also stop video if it was playing
         if (this.staticVideo) {
             this.staticVideo.classList.remove('active');
             this.staticVideo.pause();
@@ -166,12 +181,33 @@ class CameraSystem {
         }
     }
     
-    // Start static effect (for switching cameras)
+    // Start static effect (for switching cameras) - canvas-based for reliability
     startStatic() {
-        if (this.staticVideo) {
-            this.staticVideo.classList.add('active');
-            this.staticVideo.play().catch(e => console.log('Video playback failed:', e));
+        // Size canvas to panel
+        if (this.cameraPanel) {
+            this.staticCanvas.width = this.cameraPanel.clientWidth || 1280;
+            this.staticCanvas.height = this.cameraPanel.clientHeight || 720;
         }
+        this.staticCanvas.style.display = 'block';
+        this._animateStatic();
+    }
+    
+    // Render static noise frames on canvas
+    _animateStatic() {
+        if (!this.staticCtx || this.staticCanvas.style.display === 'none') return;
+        const w = this.staticCanvas.width;
+        const h = this.staticCanvas.height;
+        const imageData = this.staticCtx.createImageData(w, h);
+        const data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+            const v = Math.random() > 0.5 ? 255 : 0;
+            data[i] = v;
+            data[i + 1] = v;
+            data[i + 2] = v;
+            data[i + 3] = 180 + Math.random() * 75;
+        }
+        this.staticCtx.putImageData(imageData, 0, 0);
+        this.staticAnimId = requestAnimationFrame(() => this._animateStatic());
     }
     
     // Restore camera normal display
