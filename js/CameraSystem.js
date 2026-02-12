@@ -714,13 +714,13 @@ class CameraSystem {
             this.lastEpLocation = currentEpLocation;
         }
         
-        // 交替播放 1.ogg 和 2.ogg
-        const soundFile = this.currentSoundToggle ? '2.ogg' : '1.ogg';
+        // 交替播放 Crank1.ogg 和 Crank2.ogg
+        const soundFile = this.currentSoundToggle ? 'Crank2.ogg' : 'Crank1.ogg';
         this.currentSoundToggle = !this.currentSoundToggle;
         
         // 创建并播放音频
         const audio = new Audio(`assets/sounds/${soundFile}`);
-        audio.play().catch(e => console.log('音频播放失败:', e));
+        audio.play().catch(e => console.log('Audio play failed:', e));
         
         // 检查当前位置是否已经用完2次
         let canAttract = true;
