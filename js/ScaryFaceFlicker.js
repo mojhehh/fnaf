@@ -1,8 +1,8 @@
 // 恐怖脸闪烁效果
 const getBasePath = () => {
     const currentPath = window.location.pathname;
-    if (currentPath.includes('/FNAE-HTML5-1.1.5/')) {
-        return '/FNAE-HTML5-1.1.5/';
+    if (currentPath.includes('./')) {
+        return './';
     }
     return './';
 };

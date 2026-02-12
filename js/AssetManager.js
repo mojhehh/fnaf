@@ -86,7 +86,7 @@ class AssetManager {
         if (this.sounds[key]) {
             this.sounds[key].loop = loop;
             this.sounds[key].volume = volume;
-            this.sounds[key].play();
+            this.sounds[key].play().catch(e => console.warn(`Audio play failed for ${key}:`, e.message));
         }
     }
 
