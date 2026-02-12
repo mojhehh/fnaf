@@ -56,10 +56,14 @@ class AssetManager {
             }
         }
 
-        // 加载音频
+        // 加载音频 - with cache busting to avoid stale SW cache
+        const cacheBust = '?v=' + Date.now();
         for (const [key, path] of Object.entries(soundPaths)) {
             try {
-                this.sounds[key] = new Audio(path);
+                const audio = new Audio();
+                audio.preload = 'auto';
+                audio.src = path + cacheBust;
+                this.sounds[key] = audio;
             } catch (e) {
                 console.warn(`Failed to load sound: ${path}`);
             }
