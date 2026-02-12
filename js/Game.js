@@ -292,59 +292,126 @@ class Game {
         if (!tutorialContent) return;
         
         if (type === 'night2') {
-            // Night 2 教程：Trump
             tutorialContent.innerHTML = `
-                <h2>DEFEND YOURSELF AGAINST TRUMP</h2>
-                <p>
-                    TRUMP WILL TRY TO ATTACK YOU THROUGH THE VENTS IN CAM 1 AND CAM 2, SO IF YOU HEAR BANGING IN THE VENTS HEAD OVER TO THE CONTROL PANEL AND CLOSE THEM. 
-                    AFTER CLOSING THEM YOU WILL HEAR BANGING AGAIN AFTER A FEW SECONDS WHICH MEANS HE LEFT THE VENTS. YOU MUST OPEN THE VENTS OTHERWISE YOU WILL DIE FROM LACK OF OXYGEN. 
-                    TRUMP CAN BE LURED WITH THE AUDIOS BUT YOUR MAIN PRIORITY WITH THE AUDIO LURES SHOULD BE EPSTEIN.
-                </p>
+                <h2>NIGHT 2 — NEW THREAT: TRUMP</h2>
+                <div class="tutorial-sections">
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\u26A0\uFE0F</div>
+                        <div class="tutorial-text">
+                            <strong>TRUMP ATTACKS THROUGH VENTS</strong><br>
+                            Trump uses CAM 1 and CAM 2 vents to reach your office. Listen for banging sounds — that means he's in the vents.
+                        </div>
+                    </div>
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\uD83D\uDEAA</div>
+                        <div class="tutorial-text">
+                            <strong>CLOSE THE VENTS</strong><br>
+                            When you hear vent banging, go to the <em>Control Panel</em> (bottom of screen) and close the vents. Wait for a second banging sound — that means Trump left.
+                        </div>
+                    </div>
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\uD83D\uDCA8</div>
+                        <div class="tutorial-text">
+                            <strong>RE-OPEN VENTS QUICKLY</strong><br>
+                            You <em>must</em> reopen the vents after Trump leaves or you'll suffocate! Don't leave them closed too long.
+                        </div>
+                    </div>
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\uD83C\uDFB5</div>
+                        <div class="tutorial-text">
+                            <strong>AUDIO LURES WORK ON TRUMP TOO</strong><br>
+                            Trump can be lured with camera audio, but prioritize using lures on Epstein — he's still the bigger threat.
+                        </div>
+                    </div>
+                </div>
                 <button id="tutorial-got-it">GOT IT</button>
             `;
-            // 重新绑定按钮事件
             const gotItBtn = document.getElementById('tutorial-got-it');
-            if (gotItBtn) {
-                gotItBtn.addEventListener('click', () => this.closeTutorial());
-            }
+            if (gotItBtn) gotItBtn.addEventListener('click', () => this.closeTutorial());
         } else if (type === 'night3') {
-            // Night 3 教程：霍金
             tutorialContent.innerHTML = `
-                <h2>DEFEND YOURSELF AGAINST STEPHEN HAWKING</h2>
-                <p>
-                    STEPHEN HAWKING ALWAYS STAYS AT CAM 6 AND HE IS NOT AFFECTED BY THE AUDIO LURES. 
-                    ELECTROCUTE STEPHEN HAWKING EVERY ONCE IN A WHILE TO PREVENT HIM FROM LEAVING CAM 6.
-                </p>
+                <h2>NIGHT 3 — NEW THREAT: STEPHEN HAWKING</h2>
+                <div class="tutorial-sections">
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\uD83E\uDDBD</div>
+                        <div class="tutorial-text">
+                            <strong>HAWKING SITS AT CAM 6</strong><br>
+                            Stephen Hawking stays at Camera 6. He does <em>not</em> respond to audio lures — they won't work on him.
+                        </div>
+                    </div>
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\u26A1</div>
+                        <div class="tutorial-text">
+                            <strong>ELECTROCUTE HIM</strong><br>
+                            Switch to CAM 6 and press the <em>ELECTROCUTE</em> button periodically to keep Hawking stunned. If you forget, he'll leave CAM 6 and attack.
+                        </div>
+                    </div>
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\u23F0</div>
+                        <div class="tutorial-text">
+                            <strong>CHECK CAM 6 REGULARLY</strong><br>
+                            Balance your time between watching Epstein, managing Trump's vents, and shocking Hawking. Don't neglect any of them!
+                        </div>
+                    </div>
+                </div>
                 <button id="tutorial-got-it">GOT IT</button>
             `;
-            // 重新绑定按钮事件
             const gotItBtn = document.getElementById('tutorial-got-it');
-            if (gotItBtn) {
-                gotItBtn.addEventListener('click', () => this.closeTutorial());
-            }
+            if (gotItBtn) gotItBtn.addEventListener('click', () => this.closeTutorial());
         } else {
-            // Night 1 教程：EP
             tutorialContent.innerHTML = `
-                <h2>DEFEND YOURSELF AGAINST EPSTEIN</h2>
-                <p>
-                    EPSTEIN ALWAYS STARTS AT CAM 11. USE THE CAMERA'S AUDIO LURE TO KEEP EPSTEIN FAR AWAY FROM YOU. 
-                    MAKE SURE THE CAMERA YOU'RE PLAYING THE SOUND IN IS NEXT TO THE CAMERA WHERE EPSTEIN IS. 
-                    PLAYING SOUND IN ONLY ONE SPOT WILL NOT WORK IF YOU DO IT TWICE OR MORE IN A ROW. 
-                    USING THE AUDIO LURE TOO MUCH WILL LEAD TO THE CAMERAS BREAKING. 
-                    TO FIX THEM HEAD TO THE CONTROL PANEL AND RESTART THE CAMERAS LIKE YOU JUST DID. 
-                    EPSTEIN DOES NOT ATTACK THROUGH THE VENTS SO DON'T BOTHER CLOSING THEM FOR THIS NIGHT.
-                </p>
+                <h2>HOW TO SURVIVE</h2>
+                <div class="tutorial-sections">
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\uD83D\uDCF7</div>
+                        <div class="tutorial-text">
+                            <strong>CAMERAS</strong><br>
+                            Click the camera button (bottom-right) to open the security cameras. Click locations on the map to switch between 11 cameras.
+                        </div>
+                    </div>
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\uD83D\uDC41\uFE0F</div>
+                        <div class="tutorial-text">
+                            <strong>WATCH EPSTEIN</strong><br>
+                            Epstein starts at CAM 11 and moves toward your office. Track his movement through the cameras.
+                        </div>
+                    </div>
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\uD83C\uDFB5</div>
+                        <div class="tutorial-text">
+                            <strong>AUDIO LURE</strong><br>
+                            Use the <em>PLAY SOUND</em> button on cameras to lure Epstein away. Play it on a camera <em>next to</em> where Epstein is. Don't play the same spot twice in a row — it won't work!
+                        </div>
+                    </div>
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\u26A0\uFE0F</div>
+                        <div class="tutorial-text">
+                            <strong>DON'T OVERUSE LURES</strong><br>
+                            Using audio lures too much will crash the camera system. If cameras break, go to the <em>Control Panel</em> (bottom of screen) to restart them.
+                        </div>
+                    </div>
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\uD83D\uDCA8</div>
+                        <div class="tutorial-text">
+                            <strong>VENTS</strong><br>
+                            The control panel also lets you open/close vents. On Night 1, Epstein doesn't use vents — so don't worry about them yet.
+                        </div>
+                    </div>
+                    <div class="tutorial-section">
+                        <div class="tutorial-icon">\u23F0</div>
+                        <div class="tutorial-text">
+                            <strong>SURVIVE UNTIL 6 AM</strong><br>
+                            The clock is at the top-right. Keep Epstein away from your office until 6 AM to win the night!
+                        </div>
+                    </div>
+                </div>
                 <button id="tutorial-got-it">GOT IT</button>
             `;
-            // 重新绑定按钮事件
             const gotItBtn = document.getElementById('tutorial-got-it');
-            if (gotItBtn) {
-                gotItBtn.addEventListener('click', () => this.closeTutorial());
-            }
+            if (gotItBtn) gotItBtn.addEventListener('click', () => this.closeTutorial());
         }
         
         this.tutorialOverlay.classList.remove('hidden');
-        // Mark tutorial as active (but don't pause game, allow view rotation)
         this.state.tutorialActive = true;
     }
     

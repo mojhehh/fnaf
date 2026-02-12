@@ -960,28 +960,79 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10000;
+    overflow-y: auto;
 }
 
 #tutorial-content {
-    background: rgba(30, 30, 30, 0.95);
-    border: 3px solid #666;
-    padding: 4vh 5vw;
-    max-width: 60vw;
+    background: rgba(20, 20, 25, 0.97);
+    border: 2px solid #555;
+    padding: 3vh 4vw;
+    max-width: 55vw;
+    max-height: 85vh;
+    overflow-y: auto;
     text-align: center;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.9), inset 0 0 60px rgba(0, 0, 0, 0.3);
 }
 
 #tutorial-content h2 {
-    font-size: 3vw;
-    margin-bottom: 3vh;
+    font-size: 2.4vw;
+    margin-bottom: 2.5vh;
+    color: #e44;
+    text-shadow: 0 0 10px rgba(255, 50, 50, 0.4);
+    letter-spacing: 0.15em;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1.5vh;
+}
+
+.tutorial-sections {
+    text-align: left;
+    margin-bottom: 2vh;
+}
+
+.tutorial-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2vw;
+    margin-bottom: 1.8vh;
+    padding: 1.2vh 1vw;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid #555;
+    transition: border-color 0.2s;
+}
+
+.tutorial-section:hover {
+    border-left-color: #e44;
+}
+
+.tutorial-icon {
+    font-size: 2vw;
+    min-width: 3vw;
+    text-align: center;
+    line-height: 1;
+    padding-top: 0.3vh;
+}
+
+.tutorial-text {
+    font-size: 1.1vw;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.tutorial-text strong {
     color: #fff;
-    text-shadow: 2px 2px 4px #000;
-    letter-spacing: 0.1em;
+    font-size: 1.2vw;
+    letter-spacing: 0.05em;
+}
+
+.tutorial-text em {
+    color: #f96;
+    font-style: normal;
+    font-weight: bold;
 }
 
 #tutorial-content p {
@@ -997,19 +1048,21 @@ button {
     min-width: 150px;
     padding: 1.5vh 3vw;
     font-size: 1.8vw;
-    background: #555;
-    border: 2px solid #888;
+    background: #c33;
+    border: 2px solid #e55;
     color: #fff;
     cursor: pointer;
     transition: all 0.3s;
     font-weight: bold;
     letter-spacing: 0.2em;
+    margin-top: 1vh;
 }
 
 #tutorial-got-it:hover {
-    background: #777;
+    background: #e44;
     border-color: #fff;
     transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 50, 50, 0.5);
 }
 
 /* 隐藏类 */
@@ -1357,8 +1410,9 @@ button {
     
     /* Tutorial */
     #tutorial-content {
-        max-width: 85vw;
-        padding: 3vh 4vw;
+        max-width: 90vw;
+        padding: 2vh 3vw;
+        max-height: 80vh;
     }
     
     #tutorial-content h2 {
@@ -1367,6 +1421,24 @@ button {
     
     #tutorial-content p {
         font-size: 3.5vw;
+    }
+
+    .tutorial-icon {
+        font-size: 5vw;
+        min-width: 8vw;
+    }
+
+    .tutorial-text {
+        font-size: 3vw;
+    }
+
+    .tutorial-text strong {
+        font-size: 3.2vw;
+    }
+
+    .tutorial-section {
+        gap: 2vw;
+        padding: 1.2vh 2vw;
     }
     
     #tutorial-got-it {
@@ -1542,7 +1614,7 @@ button {
         min-height: 50px;
     }
     
-    /* Tutorial - 横屏时大幅缩小 */
+    /* Tutorial - landscape */
     #tutorial-content {
         max-width: 70vw;
         max-height: 85vh;
@@ -1559,6 +1631,24 @@ button {
         font-size: 1.6vh;
         line-height: 1.5;
         margin-bottom: 2vh;
+    }
+
+    .tutorial-icon {
+        font-size: 2.5vh;
+        min-width: 4vw;
+    }
+
+    .tutorial-text {
+        font-size: 1.5vh;
+    }
+
+    .tutorial-text strong {
+        font-size: 1.6vh;
+    }
+
+    .tutorial-section {
+        margin-bottom: 1vh;
+        padding: 0.8vh 1vw;
     }
     
     #tutorial-got-it {
