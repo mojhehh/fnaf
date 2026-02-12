@@ -142,6 +142,12 @@ class CameraSystem {
         // Hide background image and characters
         this.cameraPanel.classList.add('transitioning');
         
+        // Hide character overlay so characters don't show over the error screen
+        const characterOverlay = document.getElementById('character-overlay');
+        if (characterOverlay) {
+            characterOverlay.style.display = 'none';
+        }
+        
         // Hide map
         const cameraGrid = document.getElementById('camera-grid');
         if (cameraGrid) {
@@ -428,6 +434,11 @@ class CameraSystem {
     
     // 更新角色显示（支持多个敌人）
     updateCharacterDisplay() {
+        // Don't show characters if camera system is failed
+        if (this.game.state.cameraFailed) {
+            return;
+        }
+        
         const currentCam = this.game.state.currentCam;
         const epLocation = this.game.enemyAI.getCurrentLocation();
         const trumpLocation = this.game.enemyAI.getTrumpCurrentLocation();
