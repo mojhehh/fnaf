@@ -501,7 +501,10 @@ class CameraSystem {
         //     imageForCam: this.characterImages ? !!this.characterImages[currentCam] : 'N/A'
         // });
         
-        if (this.game.enemyAI.epstein.hasSpawned && epLocation === currentCam && this.characterImages && this.characterImages[currentCam]) {
+        // Show EP if spawned at matching cam, OR if not yet spawned and viewing cam11 (EP is always visible at start)
+        const epShouldShow = (this.game.enemyAI.epstein.hasSpawned && epLocation === currentCam) || 
+                              (!this.game.enemyAI.epstein.hasSpawned && currentCam === 'cam11');
+        if (epShouldShow && this.characterImages && this.characterImages[currentCam]) {
             // 创建EP容器（用于包含EP图片和电眼）
             const epContainer = document.createElement('div');
             epContainer.className = 'ep-container';
