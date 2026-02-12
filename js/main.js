@@ -183,7 +183,7 @@ async function preloadGameAssets() {
         });
     });
     
-    // 预加载音频（不阻塞，快速加载）
+    // Pre-warm audio (non-blocking, errors are OK - AssetManager handles actual loading)
     const cacheBust = '?v=' + Date.now();
     const audioPromises = soundPaths.map(path => {
         return new Promise((resolve) => {
@@ -194,7 +194,7 @@ async function preloadGameAssets() {
                 resolve();
             }, { once: true });
             audio.addEventListener('error', () => {
-                console.warn(`Failed to load audio: ${path}`);
+                // Audio pre-warm failed - OK, AssetManager will load it later
                 loadedAssets++;
                 updatePreloadProgress((loadedAssets / totalAssets) * 100);
                 resolve();
