@@ -330,15 +330,15 @@ class EnemyAI {
         this.characterBrightness = {
             'cam11': 100,
             'cam10': 100,
-            'cam1': 22,
-            'cam9': 8,
-            'cam8': 9,
-            'cam7': 9,
-            'cam6': 9,
-            'cam5': 7,
+            'cam1': 45,
+            'cam9': 35,
+            'cam8': 35,
+            'cam7': 35,
+            'cam6': 35,
+            'cam5': 30,
             'cam4': 65,
-            'cam3': 30,
-            'cam2': 8,
+            'cam3': 50,
+            'cam2': 35,
         };
         
         // 角色旋转配置（度数）
