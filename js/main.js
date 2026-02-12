@@ -184,6 +184,7 @@ async function preloadGameAssets() {
     });
     
     // 预加载音频（不阻塞，快速加载）
+    const cacheBust = '?v=' + Date.now();
     const audioPromises = soundPaths.map(path => {
         return new Promise((resolve) => {
             const audio = new Audio();
@@ -198,7 +199,7 @@ async function preloadGameAssets() {
                 updatePreloadProgress((loadedAssets / totalAssets) * 100);
                 resolve();
             }, { once: true });
-            audio.src = basePath + path;
+            audio.src = basePath + path + cacheBust;
             audio.load();
         });
     });

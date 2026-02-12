@@ -88,9 +88,17 @@ class AssetManager {
 
     playSound(key, loop = false, volume = 1.0) {
         if (this.sounds[key]) {
-            this.sounds[key].loop = loop;
-            this.sounds[key].volume = volume;
-            this.sounds[key].play().catch(e => console.warn(`Audio play failed for ${key}:`, e.message));
+            const audio = this.sounds[key];
+            // If audio has no valid source, try to reload it
+            if (audio.error || audio.networkState === 3) {
+                const src = audio.src.split('?')[0];
+                audio.src = src + '?v=' + Date.now();
+                audio.load();
+            }
+            audio.loop = loop;
+            audio.volume = volume;
+            audio.currentTime = 0;
+            audio.play().catch(e => console.warn(`Audio play failed for ${key}:`, e.message));
         }
     }
 
