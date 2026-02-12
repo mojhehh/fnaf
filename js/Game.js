@@ -241,21 +241,16 @@ class Game {
         // 初始化风扇状态（通风口默认打开，风扇快速旋转）
         this.initVentFanAnimation();
         
-        this.startGameLoop();
-        this.startViewRotation();
-        
-        // Start enemy AI
-        this.enemyAI.start();
-        
-        this.assets.playSound('vents', true);
-        
-        // Show tutorial
+        // Show tutorial first - night doesn't start until tutorial is closed
         if (this.state.currentNight === 1) {
             this.showTutorial('night1');
         } else if (this.state.currentNight === 2) {
             this.showTutorial('night2');
         } else if (this.state.currentNight === 3) {
             this.showTutorial('night3');
+        } else {
+            // No tutorial for this night, start immediately
+            this.beginNight();
         }
         
         // console.log('🎮 Before Golden check, currentNight:', this.state.currentNight);
@@ -419,6 +414,16 @@ class Game {
         this.tutorialOverlay.classList.add('hidden');
         // Close tutorial
         this.state.tutorialActive = false;
+        // Now start the night
+        this.beginNight();
+    }
+
+    beginNight() {
+        this.startGameLoop();
+        this.startViewRotation();
+        // Start enemy AI
+        this.enemyAI.start();
+        this.assets.playSound('vents', true);
     }
     
     // Golden 霍金彩蛋效果
