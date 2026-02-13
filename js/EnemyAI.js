@@ -7,26 +7,26 @@ class EnemyAI {
         // Epstein AI配置（按夜数）
         this.epsteinConfig = {
             1: {
-                aiLevel: 12,              // AI等级 (0-20)，12/20 = 60%移动概率
-                movementInterval: [9000, 10000],  // 移动检查间隔（毫秒）[最小值, 最大值]
+                aiLevel: 4,               // AI等级 (0-20)，4/20 = 20%移动概率 - Night 1 is intro
+                movementInterval: [18000, 25000],  // 移动检查间隔 18-25秒 (slow for Night 1)
                 movementDuration: 1000,   // 移动动画时长（毫秒）
-                spawnDelay: 10000,         // 出场延迟（10秒）
+                spawnDelay: 45000,         // 出场延迟（45秒 - give player time to learn）
                 movementProbability: {    // 移动方向概率
-                    forward: 0.8,         // 前进概率 100%
-                    lateral: 0.1,         // 平移概率 0%（当前不支持）
-                    backward: 0.1         // 后退概率 0%
+                    forward: 0.55,        // 55% forward
+                    lateral: 0.25,        // 25% lateral (wander)
+                    backward: 0.20        // 20% backward (sometimes retreats)
                 },
                 soundLureResistance: 0  // 对sound吸引的抵抗概率（0-1）
             },
             2: {
-                aiLevel: 12,
-                movementInterval: [9000, 10000],
+                aiLevel: 8,
+                movementInterval: [13000, 17000],
                 movementDuration: 1000,
-                spawnDelay: 0,
+                spawnDelay: 15000,
                 movementProbability: {
-                    forward: 0.8,
-                    lateral: 0.1,
-                    backward: 0.1
+                    forward: 0.7,
+                    lateral: 0.15,
+                    backward: 0.15
                 },
                 soundLureResistance: 0.1
             },
