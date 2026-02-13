@@ -18,6 +18,7 @@ class GameState {
     }
 
     reset() {
+        const savedNight = this.currentNight; // preserve night across reset
         this.currentTime = 0;
         this.oxygen = 100;
         this.isGameRunning = true;
@@ -30,5 +31,7 @@ class GameState {
         this.cameraFailed = false;
         this.cameraRestarting = false;
         this.controlPanelBusy = false;
+        this.controlPanelOpen = false;
+        this.currentNight = savedNight; // restore night
     }
 }

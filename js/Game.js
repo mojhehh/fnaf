@@ -559,18 +559,14 @@ class Game {
     }
 
     toggleVents() {
-        console.log('toggleVents called, controlPanelBusy:', this.state.controlPanelBusy);
-        
         // 如果控制面板正忙，不允许操作
         if (this.state.controlPanelBusy) {
-            console.log('Control panel is busy, please wait...');
             return;
         }
         
         // 标记控制面板为忙碌状态
         this.state.controlPanelBusy = true;
         this.state.ventsToggling = true;
-        console.log('Starting vent toggle animation...');
         
         // 播放心电图音效
         this.assets.playSound('ekg', false, 0.8);
@@ -580,7 +576,6 @@ class Game {
         
         if (this.state.ventsClosed) {
             // 当前关闭，要打开 -> 风扇从停止加速到快速
-            console.log('Opening vents: fan speeding up');
             if (ventIcon) {
                 ventIcon.classList.remove('stopped', 'slowing');
                 ventIcon.classList.add('speeding-up');
@@ -599,7 +594,6 @@ class Game {
             }
         } else {
             // 当前打开，要关闭 -> 风扇从快速减速到停止
-            console.log('Closing vents: fan slowing down');
             if (ventIcon) {
                 ventIcon.classList.remove('speeding-up');
                 ventIcon.classList.add('slowing');
@@ -636,7 +630,6 @@ class Game {
         // 4秒后完成切换
         setTimeout(() => {
             this.state.ventsClosed = !this.state.ventsClosed;
-            console.log('Vents:', this.state.ventsClosed ? 'closed' : 'open');
             
             // 通知 EnemyAI 通风口状态变化
             this.enemyAI.onVentsChanged(this.state.ventsClosed);
@@ -644,7 +637,6 @@ class Game {
             // 解除锁定
             this.state.ventsToggling = false;
             this.state.controlPanelBusy = false;
-            console.log('Vent toggle completed');
             
             // 更新UI和控制面板选项文本
             this.ui.update();
@@ -1115,24 +1107,18 @@ class Game {
         // 初始化风扇状态
         this.initVentFanAnimation();
         
-        this.startGameLoop();
-        this.startViewRotation();
-        
-        // Start enemy AI
-        this.enemyAI.start();
-        
-        this.assets.playSound('vents', true);
-        
-        // Show tutorial for specific nights
+        // Show tutorial first - night doesn't start until tutorial is closed
         if (this.state.currentNight === 2) {
             this.showTutorial('night2');
         } else if (this.state.currentNight === 3) {
             this.showTutorial('night3');
+        } else {
+            // No tutorial for this night, start immediately
+            this.beginNight();
         }
         
         // Night 5: 必定触发 Golden 霍金彩蛋
         if (this.state.currentNight === 5) {
-            console.log('🌟 Night 5 detected (continueToNextNight), triggering Golden Stephen...');
             setTimeout(() => {
                 this.showGoldenStephen();
             }, 1000);

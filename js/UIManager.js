@@ -264,19 +264,21 @@ class UIManager {
         popup.appendChild(optionsContainer);
         
         // Click outside to close (only if no operation in progress)
-        document.addEventListener('click', (e) => {
+        // Store reference so we don't add duplicate listeners
+        if (this._controlPanelClickOutside) {
+            document.removeEventListener('click', this._controlPanelClickOutside);
+        }
+        this._controlPanelClickOutside = (e) => {
             if (!popup.contains(e.target) && e.target.id !== 'vents-btn' && !e.target.closest('#vents-btn')) {
-                // 检查是否有操作正在进行
                 if (this.game.state.controlPanelBusy) {
-                    // console.log('Cannot close control panel: operation in progress');
-                    return; // 阻止关闭，不显示任何消息
+                    return;
                 }
-                
                 popup.classList.add('hidden');
                 this.game.state.controlPanelOpen = false;
                 this.updateControlPanelArrows();
             }
-        });
+        };
+        document.addEventListener('click', this._controlPanelClickOutside);
         
         document.body.appendChild(popup);
     }

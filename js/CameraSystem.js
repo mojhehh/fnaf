@@ -444,22 +444,6 @@ class CameraSystem {
         const trumpLocation = this.game.enemyAI.getTrumpCurrentLocation();
         const hawkingActive = this.game.enemyAI.hawking.active;
         
-        console.log(`updateCharacterDisplay - Current Cam: ${currentCam}, EP: ${epLocation}, Trump: ${trumpLocation}, Hawking: ${hawkingActive}, Night: ${this.game.state.currentNight}`);
-        
-        // 打印所有相关元素的z-index
-        console.log('🔍 Z-Index Debug:');
-        console.log('  - cameraPanel:', window.getComputedStyle(this.cameraPanel).zIndex);
-        const staticVideo = document.getElementById('camera-static-video');
-        if (staticVideo) {
-            console.log('  - staticVideo:', window.getComputedStyle(staticVideo).zIndex);
-        }
-        const existingOverlay = document.getElementById('character-overlay');
-        if (existingOverlay) {
-            console.log('  - characterOverlay:', window.getComputedStyle(existingOverlay).zIndex);
-            console.log('  - characterOverlay display:', window.getComputedStyle(existingOverlay).display);
-            console.log('  - characterOverlay children count:', existingOverlay.children.length);
-        }
-        
         // 获取或创建角色容器
         let characterOverlay = document.getElementById('character-overlay');
         if (!characterOverlay) {
@@ -478,12 +462,6 @@ class CameraSystem {
         
         // 清空之前的角色
         characterOverlay.innerHTML = '';
-        
-        console.log('🔍 Character overlay cleared, checking EP display conditions...');
-        console.log('🔍 EP hasSpawned:', this.game.enemyAI.epstein.hasSpawned);
-        console.log('🔍 EP location matches current cam:', epLocation === currentCam);
-        console.log('🔍 Has characterImages:', !!this.characterImages);
-        console.log('🔍 Has image for current cam:', this.characterImages ? !!this.characterImages[currentCam] : 'N/A');
         
         // 显示霍金（如果激活且在cam6）
         if (hawkingActive && currentCam === 'cam6') {
