@@ -83,9 +83,10 @@ button {
 }
 
 #splash-logo {
-    max-width: 250px;
-    width: 80%;
-    aspect-ratio: 16 / 9;
+    max-width: 80vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
     object-fit: contain;
     opacity: 0;
     animation: splashFadeIn 1s ease-in-out forwards;
