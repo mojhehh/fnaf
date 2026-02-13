@@ -22,7 +22,12 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
-    <div id="preloader">
+    <!-- Splash Screen (plays once before preloader) -->
+    <div id="splash-screen">
+        <img id="splash-logo" src="assets/images/splash-logo.png" alt="Logo">
+    </div>
+
+    <div id="preloader" style="display: none;">
         <div class="preloader-content">
             <div class="preloader-logo">FIVE NIGHTS<br>AT EPSTEIN'S</div>
             <div class="preloader-spinner">

@@ -225,10 +225,38 @@ function hidePreloader() {
     }
 }
 
+// Splash screen sequence
+function playSplashScreen() {
+    return new Promise(resolve => {
+        const splash = document.getElementById('splash-screen');
+        const logo = document.getElementById('splash-logo');
+        if (!splash || !logo) { resolve(); return; }
+
+        document.body.classList.add('splash-active');
+
+        // Logo fades in via CSS animation (1s), then hold 1.5s, then fade out 1s
+        setTimeout(() => {
+            splash.classList.add('splash-fade-out');
+            setTimeout(() => {
+                splash.classList.add('splash-done');
+                document.body.classList.remove('splash-active');
+                resolve();
+            }, 1000); // fade-out duration
+        }, 2500); // 1s fade-in + 1.5s hold
+    });
+}
+
 // 页面加载完成后启动
 window.addEventListener('DOMContentLoaded', async () => {
     // 禁用浏览器默认行为
     disableBrowserDefaults();
+
+    // Play splash screen first
+    await playSplashScreen();
+
+    // Show preloader after splash is done
+    const preloader = document.getElementById('preloader');
+    if (preloader) preloader.style.display = 'flex';
     
     // 先预加载所有资源
     await preloadGameAssets();
