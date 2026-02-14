@@ -421,17 +421,17 @@ class EnemyAI {
         
         // 特朗普的明暗度配置
         this.trumpBrightness = {
-            'cam10': 31,
+            'cam10': 50,
             'cam11': 100,
-            'cam9': 29,
-            'cam8': 28,
-            'cam7': 28,
-            'cam6': 28,
-            'cam5': 12,
-            'cam1': 40,
-            'cam2': 31,
-            'cam3': 19,
-            'cam4': 31,
+            'cam9': 45,
+            'cam8': 45,
+            'cam7': 45,
+            'cam6': 45,
+            'cam5': 35,
+            'cam1': 55,
+            'cam2': 50,
+            'cam3': 40,
+            'cam4': 50,
         };
         
         // 特朗普的旋转配置

@@ -474,7 +474,7 @@ class CameraSystem {
             hawkingImg.style.bottom = '0.9%';
             hawkingImg.style.width = '37%';
             hawkingImg.style.transform = 'translateX(-50%) rotate(-5deg)';
-            hawkingImg.style.filter = 'brightness(0.33) contrast(1) saturate(1)';
+            hawkingImg.style.filter = 'brightness(0.55) contrast(1) saturate(1)';
             
             characterOverlay.appendChild(hawkingImg);
             console.log(`✓ Displaying Hawking at cam6`);
