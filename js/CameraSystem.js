@@ -687,6 +687,11 @@ class CameraSystem {
         });
         
         grid.appendChild(mapContainer);
+        
+        // Show vent markers on map if Trump is crawling
+        if (this.game.enemyAI && this.game.enemyAI.trump.isCrawling) {
+            this.game.enemyAI.updateVentMapMarkers();
+        }
     }
 
     playAmbientSound() {

@@ -294,14 +294,14 @@ class Game {
                         <div class="tutorial-icon">\u26A0\uFE0F</div>
                         <div class="tutorial-text">
                             <strong>TRUMP ATTACKS THROUGH VENTS</strong><br>
-                            Trump uses CAM 1 and CAM 2 vents to reach your office. Listen for banging sounds — that means he's in the vents.
+                            Trump uses CAM 1 and CAM 2 vents to reach your office. A flashing red <em>⚠ VENT</em> warning will appear on screen when he's in the vents.
                         </div>
                     </div>
                     <div class="tutorial-section">
                         <div class="tutorial-icon">\uD83D\uDEAA</div>
                         <div class="tutorial-text">
                             <strong>CLOSE THE VENTS</strong><br>
-                            When you hear vent banging, go to the <em>Control Panel</em> (bottom of screen) and close the vents. Wait for a second banging sound — that means Trump left.
+                            When you see the vent warning, go to the <em>Control Panel</em> (bottom of screen) and close the vents. The warning will disappear when Trump retreats.
                         </div>
                     </div>
                     <div class="tutorial-section">

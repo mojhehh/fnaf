@@ -590,6 +590,8 @@ class EnemyAI {
         this.game.assets.stopSound('ventCrawling');
         // 隐藏霍金警告
         this.hideHawkingWarning();
+        // Hide vent warning
+        this.hideVentWarning();
     }
 
     // 开始移动检查循环
@@ -978,6 +980,9 @@ class EnemyAI {
         console.log(`Trump is crawling from ${fromLocation}...`);
         console.log(`Crawling config: soundDelay=${config.soundDelay}ms, soundDuration=${config.soundDuration}ms, totalDuration=${config.totalDuration}ms`);
         
+        // Show visual vent warning (for players without audio)
+        this.showVentWarning(fromLocation);
+        
         // 更新摄像头显示（Trump消失）
         this.updateCameraDisplay();
         
@@ -1008,6 +1013,9 @@ class EnemyAI {
             // 停止爬行音效（如果还在播放）
             this.game.assets.stopSound('ventCrawling');
             
+            // Hide vent warning
+            this.hideVentWarning();
+            
             // 触发跳杀
             this.triggerJumpscare('trump');
         }, config.totalDuration);
@@ -1034,6 +1042,9 @@ class EnemyAI {
         
         // Trump被阻止，立即判定离开
         this.trump.isCrawling = false;
+        
+        // Hide vent warning
+        this.hideVentWarning();
         
         // 找出所有步长为3的位置
         const depth3Locations = Object.keys(this.trumpLocationDepth).filter(loc => 
@@ -1074,6 +1085,69 @@ class EnemyAI {
         }, config.retreatDelay);
         
         return true;
+    }
+    
+    // Show visual vent warning (for players without audio)
+    showVentWarning(fromLocation) {
+        // Show office vent warning indicator
+        const ventWarning = document.getElementById('vent-warning');
+        if (ventWarning) {
+            ventWarning.classList.add('active');
+            // Update text to show which vent
+            const textEl = ventWarning.querySelector('.vent-warning-text');
+            if (textEl) {
+                const camNum = fromLocation.replace('cam', '');
+                textEl.textContent = `⚠ VENT ${camNum}`;
+            }
+        }
+        
+        // Update camera map markers if camera is open
+        this.updateVentMapMarkers();
+    }
+    
+    // Hide visual vent warning
+    hideVentWarning() {
+        const ventWarning = document.getElementById('vent-warning');
+        if (ventWarning) {
+            ventWarning.classList.remove('active');
+        }
+        
+        // Remove map markers
+        this.removeVentMapMarkers();
+    }
+    
+    // Add vent activity markers on camera map
+    updateVentMapMarkers() {
+        // Remove old markers first
+        this.removeVentMapMarkers();
+        
+        if (!this.trump.isCrawling || !this.trump.crawlingFrom) return;
+        
+        const mapContainer = document.querySelector('#camera-grid > div');
+        if (!mapContainer) return;
+        
+        // Position markers near cam1 and cam2 on the map
+        // cam1 is at x:25.7% y:84.3%, cam2 is at x:35.0% y:56.6%
+        const crawlFrom = this.trump.crawlingFrom;
+        
+        const marker = document.createElement('div');
+        marker.className = 'vent-map-marker';
+        marker.textContent = '⚠ VENT ACTIVE';
+        
+        if (crawlFrom === 'cam1') {
+            marker.style.left = '25.7%';
+            marker.style.top = '78%';
+        } else if (crawlFrom === 'cam2') {
+            marker.style.left = '35.0%';
+            marker.style.top = '50%';
+        }
+        
+        mapContainer.appendChild(marker);
+    }
+    
+    // Remove vent map markers
+    removeVentMapMarkers() {
+        document.querySelectorAll('.vent-map-marker').forEach(el => el.remove());
     }
     
     // 检查通风口状态变化（从Game.js调用）
